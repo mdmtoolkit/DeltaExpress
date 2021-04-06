@@ -32,15 +32,15 @@ namespace DeltaExpress
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tbSource = new System.Windows.Forms.TabPage();
+            this.btnNext = new System.Windows.Forms.Button();
             this.txtFilePath = new System.Windows.Forms.TextBox();
             this.btnSelectFile = new System.Windows.Forms.Button();
             this.cbSourceList = new System.Windows.Forms.ComboBox();
             this.tbMapping = new System.Windows.Forms.TabPage();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.btnNext = new System.Windows.Forms.Button();
-            this.txtDestinationTableName = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtDestinationTableName = new System.Windows.Forms.TextBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1.SuspendLayout();
             this.tbSource.SuspendLayout();
             this.tbMapping.SuspendLayout();
@@ -67,10 +67,20 @@ namespace DeltaExpress
             this.tbSource.Location = new System.Drawing.Point(4, 22);
             this.tbSource.Name = "tbSource";
             this.tbSource.Padding = new System.Windows.Forms.Padding(3);
-            this.tbSource.Size = new System.Drawing.Size(900, 392);
+            this.tbSource.Size = new System.Drawing.Size(900, 643);
             this.tbSource.TabIndex = 0;
             this.tbSource.Text = "Source";
             this.tbSource.Click += new System.EventHandler(this.tbSource_Click);
+            // 
+            // btnNext
+            // 
+            this.btnNext.Location = new System.Drawing.Point(165, 251);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(75, 23);
+            this.btnNext.TabIndex = 3;
+            this.btnNext.Text = "Next >>";
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // txtFilePath
             // 
@@ -120,26 +130,15 @@ namespace DeltaExpress
             this.tbMapping.Text = "Mapping";
             this.tbMapping.Enter += new System.EventHandler(this.tbMapping_Enter);
             // 
-            // openFileDialog1
+            // dataGridView1
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // btnNext
-            // 
-            this.btnNext.Location = new System.Drawing.Point(165, 251);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(75, 23);
-            this.btnNext.TabIndex = 3;
-            this.btnNext.Text = "Next >>";
-            this.btnNext.UseVisualStyleBackColor = true;
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
-            // 
-            // txtDestinationTableName
-            // 
-            this.txtDestinationTableName.Location = new System.Drawing.Point(179, 24);
-            this.txtDestinationTableName.Name = "txtDestinationTableName";
-            this.txtDestinationTableName.Size = new System.Drawing.Size(205, 20);
-            this.txtDestinationTableName.TabIndex = 0;
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(16, 68);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(844, 559);
+            this.dataGridView1.TabIndex = 2;
             // 
             // label1
             // 
@@ -150,15 +149,16 @@ namespace DeltaExpress
             this.label1.TabIndex = 1;
             this.label1.Text = "Choose Destination Table Name";
             // 
-            // dataGridView1
+            // txtDestinationTableName
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(16, 68);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(844, 559);
-            this.dataGridView1.TabIndex = 2;
+            this.txtDestinationTableName.Location = new System.Drawing.Point(179, 24);
+            this.txtDestinationTableName.Name = "txtDestinationTableName";
+            this.txtDestinationTableName.Size = new System.Drawing.Size(205, 20);
+            this.txtDestinationTableName.TabIndex = 0;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // Form1
             // 

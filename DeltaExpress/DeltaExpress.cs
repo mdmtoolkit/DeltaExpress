@@ -9,80 +9,45 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
 namespace DeltaExpress
 {
-
-    public partial class Form1 : Form
+    public partial class Form2 : Form
     {
-        public string filename;
-        // Create a new DataSet  
+        public string filename = string.Empty;
         DataSet dtSet = new DataSet();
         string CSVColsRows;
 
-        public Form1()
+        public Form2()
         {
             InitializeComponent();
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            openFileDialog1.ShowDialog();
-            filename = openFileDialog1.FileName;
-            txtFilePath.Text = filename;
-
+            Application.Exit();
         }
 
-        private void tbSource_Click(object sender, EventArgs e)
+      
+        private void populateMappingGrid()
         {
+            if (filename == string.Empty)
+                return;
 
-        }
+            if (dtSet.Tables.Count > 0)
+                return;
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            cbSourceList.SelectedIndex = 0;
-            btnSelectFile.Visible = false;
-            txtFilePath.Visible = false;
-            tabControl1.SelectTab("tbSource");
-
-        }
-
-        private void cbSourceList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbSourceList.SelectedItem.ToString() == "CSV")
-            {
-                btnSelectFile.Visible = true;
-                txtFilePath.Visible = true;
-            }
-            else
-            {
-                btnSelectFile.Visible = false;
-                txtFilePath.Visible = false;
-            }
-        }
-
-        private void btnNext_Click(object sender, EventArgs e)
-        {
-            tabControl1.SelectTab("tbMapping");
-        }
-
-        private void tbMapping_Enter(object sender, EventArgs e)
-        {
-            FileInfo fi = new FileInfo(filename);
-            txtDestinationTableName.Text = fi.Name.Replace(fi.Extension, "");
 
             using (StreamReader sr = File.OpenText(filename))
             {
                 CSVColsRows = sr.ReadLine();
             }
 
-                // Create a new DataTable.    
-                DataTable custTable = new DataTable("Mappings");
-                DataColumn dtColumn;
-                DataRow myDataRow;
+            // Create a new DataTable.    
+            DataTable custTable = new DataTable("Mappings");
+            DataColumn dtColumn;
+            DataRow myDataRow;
 
-            
+
 
             // Create Name column.    
             dtColumn = new DataColumn();
@@ -141,7 +106,7 @@ namespace DeltaExpress
             // Create Name column.    
             dtColumn = new DataColumn();
             dtColumn.DataType = typeof(bool);
-            dtColumn.ColumnName = "kEYColumn";
+            dtColumn.ColumnName = "KeyColumn";
             dtColumn.Caption = "Key Column";
             dtColumn.AutoIncrement = false;
             dtColumn.ReadOnly = false;
@@ -152,7 +117,7 @@ namespace DeltaExpress
             string[] colsList = CSVColsRows.Split(',');
 
             foreach (string col in colsList)
-            { 
+            {
                 myDataRow = custTable.NewRow();
                 myDataRow["SelectColumn"] = true;
                 myDataRow["SourceColumn"] = col.Replace("\"", "");
@@ -173,13 +138,27 @@ namespace DeltaExpress
             bs.DataSource = dtSet.Tables["Mappings"];
 
             // Bind data to DataGridView.DataSource  
-            dataGridView1.DataSource = bs;
+            metroGrid1.DataSource = bs;
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void tabMapping_Enter(object sender, EventArgs e)
         {
-            
+            populateMappingGrid();
+        }
+
+        private void btnSelectFile_Click_1(object sender, EventArgs e)
+        {
+            openFileDialog1.ShowDialog();
+            filename = openFileDialog1.FileName;
+            txtFilePath.Text = filename;
+
+            FileInfo fi = new FileInfo(filename);
+            txtDestinationTableName.Text = fi.Name.Replace(fi.Extension, "");
+        }
+
+        private void btnSourceNext_Click_1(object sender, EventArgs e)
+        {
+            tabControl.SelectTab("tabMapping");
         }
     }
 }
-
